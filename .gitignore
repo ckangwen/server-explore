@@ -38,5 +38,6 @@ tmp
 out
 release.zip
 
-prisma/db.sqlite
+prisma/*.sqlite
 .history
+.env
