@@ -1,6 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { AuthController } from './auth.controller';
-import { PrismaService } from '@/common/service/prisma.service';
 import { AuthService } from './auth.service';
 import { JwtModule } from '@nestjs/jwt';
 import globalConfig from '@/config';
@@ -12,10 +11,10 @@ describe('AuthController', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [AuthController],
-      providers: [PrismaService, AuthService],
+      providers: [AuthService],
       imports: [
         JwtModule.register({
-          secret: globalConfig.jwt.secretOrKey,
+          secret: globalConfig.jwt.secretKey,
           signOptions: {
             expiresIn: globalConfig.jwt.expiresIn,
           },

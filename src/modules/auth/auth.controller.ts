@@ -26,7 +26,7 @@ export class AuthController {
   @Post('login')
   @HttpCode(HttpStatus.OK)
   async login(body: LoginDTO) {
-    const user = await this.authService.validateUser(body.email, body.password);
+    const user = await this.authService.validateUserPwd(body.email, body.password);
 
     if (!user) {
       return {
@@ -35,7 +35,10 @@ export class AuthController {
       };
     }
 
-    const token = await this.authService.createAccessToken({ userId: user.id });
+    const token = await this.authService.createAccessToken({
+      userId: user.id,
+      email: user.email,
+    });
 
     return {
       ok: true,

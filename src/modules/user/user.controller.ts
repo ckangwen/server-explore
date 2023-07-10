@@ -1,5 +1,6 @@
-import { Controller, Get, HttpCode, HttpStatus, Param } from '@nestjs/common';
+import { Controller, Get, HttpCode, HttpStatus, Param, UseGuards } from '@nestjs/common';
 import { UserService } from './user.service';
+import { JWTAuthGuard } from '@/common/guard/auth.guard';
 
 @Controller('user')
 export class UserController {
@@ -7,6 +8,7 @@ export class UserController {
 
   @Get(':id')
   @HttpCode(HttpStatus.OK)
+  @UseGuards(JWTAuthGuard)
   getUser(@Param('id') userId: string) {
     return this.userService.findUserById(userId);
   }
