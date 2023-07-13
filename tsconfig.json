@@ -12,7 +12,6 @@
     "baseUrl": "./",
     "paths": {
       "@/*": ["src/*"],
-      "models/*": ["src/models/*"],
     },
     "incremental": true,
     "skipLibCheck": true,

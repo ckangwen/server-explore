@@ -1,9 +1,9 @@
 
 import { Injectable, UnauthorizedException } from "@nestjs/common";
-import { PassportStrategy } from "@nestjs/passport"
-import { Strategy, StrategyOptions, ExtractJwt } from "passport-jwt"
-import { AuthService } from './auth.service';
-import { JwtPayload } from "./auth.interface"
+import { PassportStrategy } from "@nestjs/passport";
+import { Strategy, StrategyOptions, ExtractJwt } from "passport-jwt";
+import { AuthService } from "./auth.service";
+import { JwtPayload } from "./auth.interface";
 import globalConfig from "@/config";
 
 @Injectable()
@@ -16,18 +16,21 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       secretOrKey: globalConfig.jwt.secretKey,
       ignoreExpiration: false,
-    }
+    };
 
-    super(options)
+    super(options);
   }
 
 
+  /**
+   * 由 Passport 调用，用于解析 jwt token
+   */
   async validate(payload: JwtPayload) {
-    const user = await this.authService.verifyJwtPayload(payload)
+    const user = await this.authService.verifyJwtPayload(payload);
     if (user) {
-      return user
+      return user;
     }
-    throw new UnauthorizedException('身份已过期')
+    throw new UnauthorizedException("身份验证失败");
   }
 
 }

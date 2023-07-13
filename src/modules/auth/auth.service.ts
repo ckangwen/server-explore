@@ -1,8 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { hashPassword } from '@/libs/password';
-import { JwtService } from '@nestjs/jwt';
-import { PrismaService } from '@/shared/services/prisma.service';
-import { JwtPayload } from './auth.interface';
+import { Injectable } from "@nestjs/common";
+import { hashPassword } from "@/libs/password";
+import { JwtService } from "@nestjs/jwt";
+import { PrismaService } from "@/shared/services/prisma.service";
+import { JwtPayload } from "./auth.interface";
 
 @Injectable()
 export class AuthService {
@@ -40,7 +40,7 @@ export class AuthService {
     });
 
     if (user?.email !== payload.email) {
-      return null
+      return null;
     }
 
     return user;

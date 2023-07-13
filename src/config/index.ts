@@ -1,6 +1,6 @@
 const globalConfig = {
   jwt: {
-    secretKey: '__JWT_SECRET_KEY__',
+    secretKey: "__JWT_SECRET_KEY__",
     expiresIn: 86400,
   },
 };

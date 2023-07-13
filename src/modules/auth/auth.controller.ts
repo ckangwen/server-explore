@@ -1,17 +1,17 @@
-import { Controller, Post, HttpCode, HttpStatus, Body } from '@nestjs/common';
-import { RegisterDTO, LoginDTO } from './auth.dto';
-import { AuthService } from './auth.service';
-import { UserService } from '../user/user.service';
-import { AuthMessage } from '@/constants';
+import { Controller, Post, HttpCode, HttpStatus, Body } from "@nestjs/common";
+import { RegisterDTO, LoginDTO } from "./auth.dto";
+import { AuthService } from "./auth.service";
+import { UserService } from "../user/user.service";
+import { AuthMessage } from "@/constants";
 
-@Controller('auth')
+@Controller("auth")
 export class AuthController {
   constructor(
     private readonly authService: AuthService,
     private readonly userService: UserService,
   ) {}
 
-  @Post('register')
+  @Post("register")
   @HttpCode(HttpStatus.CREATED)
   async register(@Body() body: RegisterDTO) {
     const user = await this.userService.createUser(body);
@@ -23,7 +23,7 @@ export class AuthController {
     };
   }
 
-  @Post('login')
+  @Post("login")
   @HttpCode(HttpStatus.OK)
   async login(body: LoginDTO) {
     const user = await this.authService.validateUserPwd(body.email, body.password);

@@ -1,7 +1,7 @@
-import { PrismaService } from '@/shared/services/prisma.service';
-import { Injectable } from '@nestjs/common';
-import { CreateUserDTO } from './user.dto';
-import { hashPassword } from '@/libs/password';
+import { PrismaService } from "@/shared/services/prisma.service";
+import { Injectable } from "@nestjs/common";
+import { CreateUserDTO } from "./user.dto";
+import { hashPassword } from "@/libs/password";
 
 @Injectable()
 export class UserService {
