@@ -1,7 +1,9 @@
 import { Injectable } from "@nestjs/common";
-import { hashPassword } from "@/libs/password";
 import { JwtService } from "@nestjs/jwt";
-import { PrismaService } from "@/shared/services/prisma.service";
+
+import { PrismaService } from "@/common/prisma.service";
+import { hashPassword } from "@/utils/password";
+
 import { JwtPayload } from "./auth.interface";
 
 @Injectable()
@@ -36,7 +38,7 @@ export class AuthService {
       },
       select: {
         email: true,
-      }
+      },
     });
 
     if (user?.email !== payload.email) {

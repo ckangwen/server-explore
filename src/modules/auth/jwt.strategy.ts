@@ -1,17 +1,15 @@
-
 import { Injectable, UnauthorizedException } from "@nestjs/common";
 import { PassportStrategy } from "@nestjs/passport";
-import { Strategy, StrategyOptions, ExtractJwt } from "passport-jwt";
-import { AuthService } from "./auth.service";
-import { JwtPayload } from "./auth.interface";
+import { ExtractJwt, Strategy, StrategyOptions } from "passport-jwt";
+
 import globalConfig from "@/config";
+
+import { JwtPayload } from "./auth.interface";
+import { AuthService } from "./auth.service";
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
-  constructor(
-    private readonly authService: AuthService
-  ) {
-
+  constructor(private readonly authService: AuthService) {
     const options: StrategyOptions = {
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       secretOrKey: globalConfig.jwt.secretKey,
@@ -20,7 +18,6 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 
     super(options);
   }
-
 
   /**
    * 由 Passport 调用，用于解析 jwt token
@@ -32,5 +29,4 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     }
     throw new UnauthorizedException("身份验证失败");
   }
-
 }

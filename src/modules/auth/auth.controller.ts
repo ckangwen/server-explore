@@ -1,26 +1,24 @@
-import { Controller, Post, HttpCode, HttpStatus, Body } from "@nestjs/common";
-import { RegisterDTO, LoginDTO } from "./auth.dto";
-import { AuthService } from "./auth.service";
+import { Body, Controller, HttpCode, HttpStatus, Post } from "@nestjs/common";
+
+import { AUTH_RESPONSE_MSG } from "@/constants";
+
 import { UserService } from "../user/user.service";
-import { AuthMessage } from "@/constants";
+import { LoginDTO, RegisterDTO } from "./auth.dto";
+import { AuthService } from "./auth.service";
 
 @Controller("auth")
 export class AuthController {
   constructor(
-    private readonly authService: AuthService,
     private readonly userService: UserService,
+    private readonly authService: AuthService,
   ) {}
 
   @Post("register")
   @HttpCode(HttpStatus.CREATED)
   async register(@Body() body: RegisterDTO) {
-    const user = await this.userService.createUser(body);
+    const res = await this.userService.createUser(body);
 
-    return {
-      ok: true,
-      data: user,
-      msg: AuthMessage.RegisterSuccess,
-    };
+    return res;
   }
 
   @Post("login")
@@ -31,7 +29,7 @@ export class AuthController {
     if (!user) {
       return {
         ok: false,
-        msg: AuthMessage.PasswordError,
+        msg: AUTH_RESPONSE_MSG.PASSWORD_ERROR,
       };
     }
 
@@ -42,7 +40,7 @@ export class AuthController {
 
     return {
       ok: true,
-      msg: AuthMessage.LoginSuccess,
+      msg: AUTH_RESPONSE_MSG.LOGIN_SUCCESS,
       data: {
         token,
       },

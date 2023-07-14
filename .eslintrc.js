@@ -1,5 +1,8 @@
 module.exports = {
   root: true,
+  extends: [
+    '@charrue/eslint-config-typescript',
+  ],
   parserOptions: {
     project: 'tsconfig.json',
     tsconfigRootDir: __dirname,
@@ -10,9 +13,6 @@ module.exports = {
     jest: true,
   },
   ignorePatterns: ['.eslintrc.js'],
-  extends: [
-    '@charrue/eslint-config-typescript',
-  ],
   rules: {
     'max-classes-per-file': 'off',
     '@typescript-eslint/interface-name-prefix': 'off',

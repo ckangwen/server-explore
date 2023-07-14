@@ -39,5 +39,6 @@ out
 release.zip
 
 prisma/*.sqlite
+prisma/*.sqlite-journal
 .history
 .env

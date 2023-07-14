@@ -1,7 +1,8 @@
 import { NestFactory } from "@nestjs/core";
-import { AppModule } from "./app.module";
-import helmet from "helmet";
 import rateLimit from "express-rate-limit";
+import helmet from "helmet";
+
+import { AppModule } from "./app.module";
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
