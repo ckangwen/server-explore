@@ -2,7 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 
 import { PrismaService } from "@/common/prisma.service";
-import { hashPassword } from "@/utils/password";
+import { verifyPassword } from "@/utils/password";
 
 import { JwtPayload } from "./auth.interface";
 
@@ -24,7 +24,8 @@ export class AuthService {
       return null;
     }
 
-    if (user.password !== (await hashPassword(password))) {
+    const isPwdValid = await verifyPassword(password, user.password);
+    if (!isPwdValid) {
       return null;
     }
 
