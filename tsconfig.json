@@ -10,9 +10,10 @@
     "sourceMap": true,
     "outDir": "./dist",
     "types": ["vitest/globals"],
-    "baseUrl": "./",
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"],
+      "@": ["./src"],
+      "@/*": ["./src/*"],
     },
     "incremental": true,
     "skipLibCheck": true,
